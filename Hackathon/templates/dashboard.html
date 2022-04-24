@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static',filename = 'css/style1.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class='bx bx-leaf'></i>
+      <!--<span class="icon"><ion-icon name="leaf-outline"></ion-icon></span>-->
+      <!--<i class='bx bxl-c-plus-plus'></i>-->
+      <span class="logo_name">OnyX</span>
+    </div>
+      <ul class="nav-links">
+        <li>
+          <a href="#" class="active">
+            <i class='bx bx-grid-alt' ></i>
+            <!--<span class="icon"><ion-icon name="pie-chart-outline"></ion-icon></span>-->
+            <span class="links_name">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+          	<!--<span class="icon"><ion-icon name="people-outline"></ion-icon></span>-->
+            <i class='bx bx-user' ></i>
+            <span class="links_name">Users</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+          	<!--<span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>-->
+            <i class='bx bx-collection' ></i>
+            <span class="links_name">Logs</span>
+          </a>
+        </li>
+        <li class="log_out">
+          <a href="#">
+          	<!--<span class="icon"></span>-->
+            <i class='bx bx-log-out'></i>
+            <span class="links_name">Log out</span>
+          </a>
+        </li>
+      </ul>
+  </div>
+  <section class="home-section">
+    <nav>
+      <div class="sidebar-button">
+        <i class='bx bx-menu sidebarBtn'></i>
+        <span class="dashboard">Dashboard</span>
+      </div>
+      <!--<div class="search-box">
+        <input type="text" placeholder="Search...">
+        <i class='bx bx-search' ></i>
+      </div>-->
+      <div class="profile-details">
+        <!--<img src="images/profile.jpg" alt="">-->
+        <span class="admin_name">{{username}}</span>
+        <!--<i class='bx bx-chevron-down' ></i>-->
+      </div>
+    </nav>
+    <form action = "/submit" method = 'post'>
+    <div class="home-content">
+      <div class="overview-boxes">
+        <div class="box">
+          <div class="right-side">
+            <div class="box-topic">Soil Moisture</div>
+            <div class="number">{{soil}}</div>
+
+            <div class="indicator">
+
+              <span class="text">Taken from sensor</span>
+            </div>
+          </div>
+          <i class='bx bx-droplet bx-flashing cart two'></i>
+        </div>
+        <div class="box">
+          <div class="right-side">
+            <div class="box-topic">Precipitation</div>
+            <div class="number">{{prec}}</div>
+
+            <div class="indicator">
+              <span class="text">Taken from location</span>
+            </div>
+          </div>
+          <i class='bx bx-cloud-light-rain bx-flashing cart three' ></i>
+        </div>
+        <div class="box">
+          <div class="right-side">
+            <div class="box-topic">Probability</div>
+            <div class="number">{{preci_pro}}</div>
+            <div class="indicator">
+              <span class="text">Taken from location</span>
+            </div>
+          </div>
+          <i class='bx bx-bar-chart bx-flashing cart four'></i>
+        </div>
+        <div class="box">
+          <div class="right-side">
+            <div class="box-topic">Crop Status</div>
+            <div class="number">{{crop}}</div>
+            <i class='bx bx-leaf bx-flashing cart five' ></i>
+            <label for="img"></label>
+            <div class="indicator">              
+              <span class="text">Taken from camera</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <input type="submit" id="submit" value="submit" class="btn" />
+    <input type="reset" id="reset" value="reset" class="btn" /> -->
+    <div class="home-content">
+      <div class="overview-boxes">
+        <div class="box">
+          <div class="right-side">
+            <div class="box-topic">Irrigation Duration</div>
+            <div class="number" id="duration" name = "duration">{{duration}}</div>
+        </div>
+      </div>
+        </div>
+      </div>
+  </form>
+	<!--<div id="chartDiv" style="max-width: 300px;height: 180px;margin: 0px auto"></div>
+    	</div>
+    	<script type="text/javascript" src="graph.js"></script>
+    	<script type="text/javascript"></script>-->
+      <img src="static/images/abc.png" class="image" alt="" />
+  </section>
+
+  <script>
+    let sidebar = document.querySelector(".sidebar");
+	let sidebarBtn = document.querySelector(".sidebarBtn");
+	sidebarBtn.onclick = function() {
+  	sidebar.classList.toggle("active");
+  	if(sidebar.classList.contains("active")){
+    sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
+	}else
+  	sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+	}	
+ </script>
+
+
+ <!--<script type="text/javascript">
+      /*
+Dynamically update chart data and labels on a timer.
+Learn how to:
+
+  - Add time data points to the chart in realtime.
+*/
+      // JS
+      var arrowIcon = '';
+      var date = new Date().getTime();
+      var points = [];
+      var INTERVAL_ID = null;
+
+      for (var i = 0; i < 20; i++) {
+        points.push({ y: randomNumber(500, 1000), x: new Date(date) });
+        date = date + 24 * 3600000 * 1;
+      }
+
+      var chart;
+
+      JSC.chart(
+        'chartDiv',
+        {
+          type: 'area spline',
+          animation_duration: 600,
+          defaultSeries: {
+            shape_opacity: 0.3,
+            mouseTracking_enabled: false
+          },
+          legend_visible: false,
+          xAxis_visible: false,
+          yAxis: {
+            visible: false,
+            scale_range: [500, 1000],
+            formatString: 'c0'
+          },
+          margin_top: 30,
+          defaultAnnotation: { offset: '0,-35' },
+          annotations: [
+            { id: 'value', position: 'top left', label_text: '', label_style: { fontSize: 32, fontWeight: 'bold' } },
+            { id: 'icon', position: 'top left', label_text: '' },
+            { id: 'difference', position: 'top left', label_text: '', label_style_fontSize: 20 },
+            { id: 'name', position: 'inside left top', label_text: 'Sales', label_style_fontSize: 20 }
+          ],
+          series: [
+            {
+              shape_opacity: 0.3,
+              mouseTracking_enabled: false,
+              color: '#039BE5',
+              defaultPoint_marker_visible: false,
+              points: points
+            }
+          ],
+          toolbar: {
+            items: {
+              Stop: {
+                position: 'inside right top',
+                type: 'option',
+                icon_name: 'system/default/pause',
+                offset: '0,-50',
+                boxVisible: true,
+                label_text: 'Pause',
+                events_change: playPause,
+                states_select: {
+                  label_text: 'Play',
+                  icon_name: 'system/default/play'
+                }
+              }
+            }
+          }
+        },
+        function(c) {
+          chart = c;
+          updateLabels();
+          startUpdate();
+        }
+      );
+
+      function playPause(val) {
+        if (val === true) {
+          clearInterval(INTERVAL_ID);
+        } else {
+          startUpdate();
+        }
+      }
+      function addDataPoint() {
+        chart.series(0).points.add({ y: randomNumber(500, 1000), x: new Date(date) }, { shift: true });
+        date = date + 24 * 3600000 * 1;
+        updateLabels();
+      }
+
+      function startUpdate() {
+        INTERVAL_ID = setInterval(function() {
+          addDataPoint();
+        }, 1000);
+      }
+
+      function updateLabels() {
+        var series = chart.series(0);
+        var pointY = series.points(19).options('y');
+        var prevPointY = series.points(18).options('y');
+        chart.annotations('value').options({ label_text: series.points(19).replaceTokens('%value') });
+        chart.annotations('difference').options({ label_text: getDifference() });
+        chart.annotations('icon').options({ label_text: getIcon() });
+
+        function getDifference() {
+          var val = (pointY / prevPointY - 1) * 100;
+          return val > 0
+            ? '<span style="color:#43a047">' + JSC.formatNumber(Math.abs(val), 'n2') + '%</span>'
+            : '<span style="color:#ef5350">' + JSC.formatNumber(Math.abs(val), 'n2') + '%</span>';
+        }
+        function getIcon() {
+          if (pointY > prevPointY) {
+            arrowIcon = '<icon name=material/navigation/arrow-drop-up size=16 fill=#43a047>';
+          } else {
+            arrowIcon = '<icon name=material/navigation/arrow-drop-down size=16 fill=#ef5350>';
+          }
+          return arrowIcon;
+        }
+      }
+
+      function randomNumber(min, max) {
+        return Math.floor(min + Math.random() * (max + 1 - min));
+      }
+    </script>-->
+
+ <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+ <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+ <script src="{{ url_for('static',filename = 'script/graph.js') }}"></script>
+</body>
+</html>
+
+
